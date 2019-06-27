@@ -1,0 +1,37 @@
+group oracle;
+
+///////////////////////////////
+// definition of database types
+///////////////////////////////
+
+// type definition without length and precision
+type_def(t) ::= "<t>"
+
+// type definition with length
+type_def_length(t,l) ::= "<t>(<l>)"
+
+// type definition with length and precision
+type_def_length_precision(t,l,p) ::= "<t>(<l>,<p>)"
+
+////////////////////
+// delegate a string
+////////////////////
+delegate_string(s) ::= "<s>"
+
+delegate_strings(sl) ::= <<
+<sl; separator="\n">
+>>
+
+create_table(table_id, elems) ::= <<
+CREATE TABLE <table_id> (
+  <elem_list(elems)>
+);
+>>
+
+
+//create_table(table_id, elems) ::= <<
+//  Test <elems; separator=",">
+//>>
+elem_list(elems) ::= <<
+<elems; separator=",\n">
+>>

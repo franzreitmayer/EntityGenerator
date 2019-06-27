@@ -1,0 +1,47 @@
+DOMAIN do_esn JTYPE String DBTYPE CHAR LENGTH 3;
+DOMAIN do_text JTYPE String DBTYPE VARCHAR2 LENGTH 100;
+DOMAIN supplier JTYPE String DBTYPE VARCHAR2 LENGTH 20;
+DOMAIN do_amount JTYPE String DBTYPE NUMBER LENGTH 16 PRECISION 4;
+DOMAIN do_quantity
+			JTYPE Decimal
+			DBTYPE NUMBER
+			LENGTH 16
+			PRECISION 2;
+			
+ELEMENT esn1 DOMAIN do_esn STEXT "ESN" MTEXT "Standard ESN" LTEXT "Standard Einkaufschlüsselnummer";
+ELEMENT esn2 DOMAIN do_esn STEXT "ESN2" MTEXT "ESN (Pronics)" LTEXT "Einkaufschlüsselnummer (Prosemantics)";
+ELEMENT accounting_text DOMAIN do_text STEXT "TXT" MTEXT "Text" LTEXT "Accounting Text";
+ELEMENT supplier DOMAIN supplier STEXT "SNO" MTEXT "Supplier#" LTEXT "Lieferantennummer";
+
+ELEMENT gross_amount DOMAIN do_amount STEXT "Brutto" MTEXT "Brutto Betr." LTEXT "Brutto Betrag";
+ELEMENT net_amount DOMAIN do_amount STEXT "Netto" MTEXT "Netto Betr." LTEXT "Netto Betrag";
+ELEMENT del_qty
+		DOMAIN do_quantity
+		STEXT "Qty."
+		MTEXT "Quantity"
+		LTEXT "Delivered Quantity";
+
+ENTITY booking (
+	ELEMENT esn1,
+	ELEMENT esn2,
+	ELEMENT accounting_text,
+	ELEMENT supplier, 
+	ELEMENT gross_amount,
+	ELEMENT net_amount
+	);
+	
+ENTITY test (
+	ELEMENT esn1,
+	ELEMENT esn2 );
+	
+ENTITY test2 (
+	ELEMENT col1 DOMAIN do_col1 JTYPE String DBTYPE VARCHAR2 LENGTH 50 STEXT "col1",
+	ELEMENT col3 DOMAIN do_col3 JTYPE String DBTYPE VARCHAR2 LENGTH 40 STEXT "col3" MTEXT "Column 3",
+	ELEMENT col2 DOMAIN do_col1 STEXT "col2",
+	ELEMENT col4 DOMAIN do_date JTYPE Date DBTYPE TIMESTAMP STEXT "Date" MTEXT "Date Book." LTEXT "Date of booking",
+	ELEMENT del_qty );
+		
+ENTITY test3 (
+	ELEMENT del_qty,
+	ELEMENT del_date DOMAIN do_date
+		STEXT "D. Date" MTEXT "Del. Date" LTEXT "Delivery Date");
